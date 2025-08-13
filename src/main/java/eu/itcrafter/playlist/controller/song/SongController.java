@@ -1,7 +1,6 @@
 package eu.itcrafter.playlist.controller.song;
 
 import eu.itcrafter.playlist.persistence.song.Song;
-import eu.itcrafter.playlist.service.song.SongDTO;
 import eu.itcrafter.playlist.service.song.SongService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

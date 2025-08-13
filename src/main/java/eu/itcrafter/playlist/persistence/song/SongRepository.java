@@ -1,9 +1,8 @@
 package eu.itcrafter.playlist.persistence.song;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface SongRepository extends Repository<Song, Integer> {
-    List<Song> findAll();
+public interface SongRepository extends JpaRepository<Song, Integer> {
 }

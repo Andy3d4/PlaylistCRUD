@@ -1,4 +1,4 @@
-package eu.itcrafter.playlist.service.song;
+package eu.itcrafter.playlist.service.song.dto;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -6,7 +6,7 @@ import java.time.LocalTime;
 
 @Getter
 @Setter
-public class SongDTO {
+public class SongDto {
     private Integer id;
     private String name;
     private String mood;
