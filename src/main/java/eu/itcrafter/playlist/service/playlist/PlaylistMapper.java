@@ -18,7 +18,9 @@ public interface PlaylistMapper {
     @Mapping(source = "name", target = "name")
     @Mapping(source = "createdat", target = "createdat")
     @Mapping(source = "id", target = "id")
+    @Mapping(source = "user.username", target = "username")
     PlaylistDto toPlaylistDto(Playlist playlist);
 
     List<PlaylistDto> toPlaylistDtoList(List<Playlist> playlists);
+
 }

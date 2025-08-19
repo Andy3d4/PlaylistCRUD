@@ -8,6 +8,6 @@ import org.mapstruct.ReportingPolicy;
 
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface SongMapper {
-    SongDto toDto(Song song);
+    SongDto toSongDto(Song song);
     Song toSong(SongDto dto);
 }

@@ -22,4 +22,6 @@ public class PlaylistDto implements Serializable {
     private String name;
     @NotNull
     private LocalDate createdat;
+    private String username;
+
 }

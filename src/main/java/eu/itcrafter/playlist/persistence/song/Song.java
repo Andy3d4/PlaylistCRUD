@@ -1,5 +1,6 @@
 package eu.itcrafter.playlist.persistence.song;
 
+import eu.itcrafter.playlist.persistence.playlist.Playlist;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -41,5 +43,4 @@ public class Song {
     @NotNull
     @Column(name = "GENRE", nullable = false, length = 12)
     private String genre;
-
 }

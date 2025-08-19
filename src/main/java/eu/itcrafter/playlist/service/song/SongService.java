@@ -2,6 +2,8 @@ package eu.itcrafter.playlist.service.song;
 
 import eu.itcrafter.playlist.persistence.song.Song;
 import eu.itcrafter.playlist.persistence.song.SongRepository;
+import eu.itcrafter.playlist.service.song.dto.SongDto;
+import eu.itcrafter.playlist.utils.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,5 +20,10 @@ public class SongService {
         return songRepository.findAll();
     }
 
+    public SongDto getSongById(Integer songId) {
+        Song song = songRepository.findById(songId)
+                .orElseThrow(() -> new ResourceNotFoundException("Song not found"));
+        return songMapper.toSongDto(song);
+    }
 
 }
