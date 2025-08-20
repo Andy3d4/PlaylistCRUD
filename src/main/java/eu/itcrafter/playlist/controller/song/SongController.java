@@ -7,10 +7,7 @@ import eu.itcrafter.playlist.service.song.dto.SongDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,5 +37,17 @@ public class SongController {
             @ApiResponse(responseCode = "200", description = "OK")})
     public SongDto getAllPlaylistSongs(@PathVariable int id) {
         return songService.getSongById(id);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Updates the songs information.",
+            description = """
+                    Updates the song information the system.
+                    If the playlist does not exist, responds with error code 409 (CONFLICT).""")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "409", description = "Song name already exists")})
+    public void updateSong(@PathVariable("id") Integer id, @RequestBody SongDto songDto) {
+        songService.updateSong(id, songDto);
     }
 }

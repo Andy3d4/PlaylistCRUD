@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static eu.itcrafter.playlist.utils.Error.PLAYLIST_NOT_FOUND;
+
 @Service
 @RequiredArgsConstructor
 public class PlaylistService {
@@ -25,8 +27,14 @@ public class PlaylistService {
 
     public PlaylistWithSongsDto getAllSongsInPlaylist(int id) {
         Playlist playlist = playlistRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Playlist not found"));
+                .orElseThrow(() -> new ResourceNotFoundException(PLAYLIST_NOT_FOUND.getMessage()));
         return playlistMapper.toPlaylistWithSongsDto(playlist);
+    }
+    public void updatePlaylistName(int id, String name){
+        Playlist playlist = playlistRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(PLAYLIST_NOT_FOUND.getMessage()));
+        playlist.setName(name);
+        playlistRepository.save(playlist);
     }
 
 }

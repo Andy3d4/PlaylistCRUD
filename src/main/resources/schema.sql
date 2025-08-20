@@ -23,7 +23,7 @@ CREATE TABLE Song (
     id int GENERATED ALWAYS AS IDENTITY NOT NULL,
     name varchar(50)  NOT NULL,
     mood varchar(12)  NOT NULL,
-    duration time  NOT NULL,
+    duration varchar(12)  NOT NULL,
     artist varchar(20)  NOT NULL,
     genre varchar(12)  NOT NULL,
     CONSTRAINT Song_pk PRIMARY KEY (id)

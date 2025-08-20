@@ -25,11 +25,7 @@ public class Playlist {
     @NotNull
     @Column(name = "NAME", nullable = false, length = 20)
     private String name;
-
-    @NotNull
-    @Column(name = "USERID", nullable = false)
-    private Integer userId;
-
+    
     @NotNull
     @Column(name = "CREATEDAT", nullable = false)
     private LocalDate createdat;

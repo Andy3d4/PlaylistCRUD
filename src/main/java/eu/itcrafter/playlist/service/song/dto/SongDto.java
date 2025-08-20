@@ -10,7 +10,7 @@ public class SongDto {
     private Integer id;
     private String name;
     private String mood;
-    private LocalTime duration;
+    private String duration;
     private String artist;
     private String genre;
 }

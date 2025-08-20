@@ -32,7 +32,7 @@ public class Song {
 
     @NotNull
     @Column(name = "DURATION", nullable = false)
-    private LocalTime duration;
+    private String duration;
 
     @Size(max = 20)
     @NotNull
