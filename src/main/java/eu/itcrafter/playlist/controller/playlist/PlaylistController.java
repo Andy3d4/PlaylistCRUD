@@ -38,17 +38,28 @@ private final PlaylistService playlistService;
     public PlaylistWithSongsDto getAllPlaylistSongs(@PathVariable int id) {
         return playlistService.getAllSongsInPlaylist(id);
     }
-    /*@PostMapping
-    @Operation(summary = "Adds a new genre.",
+    @PostMapping("/add-playlist")
+    @Operation(summary = "Adds a new playlist.",
             description = """
-                    Creates a new genre in the system.
-                    If the genre already exists, responds with error code 409 (CONFLICT).""")
+                    Creates a new playlist in the system for user.
+                    If the playlist already exists, responds with error code 409 (CONFLICT).""")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
-            @ApiResponse(responseCode = "409", description = "Genre already exists")})
-    public void addGenre(@RequestParam String genreName) {
-        genreService.addGenre(genreName);
-    }*/
+            @ApiResponse(responseCode = "409", description = "Playlist already exists")})
+    public void addPlaylist(@RequestBody PlaylistDto playlistDto ) {
+        playlistService.addPlaylist(playlistDto);
+    }
+    @PostMapping("/add-song-to-playlist/{playlistId}/{songId}")
+    @Operation(summary = "Adds a new song to playlist.",
+            description = """
+                    Adds a song in the playlist.
+                    If the song already exists, responds with error code 409 (CONFLICT).""")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "409", description = "Song already exists")})
+    public void addSongToPlaylist(@RequestParam Integer playlistId, @RequestParam Integer songId ) {
+        playlistService.addSongToPlaylist(playlistId, songId);
+    }
 
     @PutMapping("/{id}")
     @Operation(summary = "Updates the playlist name.",
