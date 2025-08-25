@@ -1,7 +1,9 @@
-package eu.itcrafter.playlist.service.song;
+package eu.itcrafter.playlist.service.playlist;
 
 import eu.itcrafter.playlist.persistence.song.Song;
 import eu.itcrafter.playlist.persistence.song.SongRepository;
+import eu.itcrafter.playlist.service.song.SongMapper;
+import eu.itcrafter.playlist.service.song.SongService;
 import eu.itcrafter.playlist.service.song.dto.SongDto;
 import eu.itcrafter.playlist.utils.exceptions.DatabaseConstraintException;
 import eu.itcrafter.playlist.utils.exceptions.ResourceNotFoundException;
@@ -17,7 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)

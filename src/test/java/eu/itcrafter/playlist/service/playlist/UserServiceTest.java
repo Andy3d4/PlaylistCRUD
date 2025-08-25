@@ -1,7 +1,9 @@
-package eu.itcrafter.playlist.service.user;
+package eu.itcrafter.playlist.service.playlist;
 
 import eu.itcrafter.playlist.persistence.user.User;
 import eu.itcrafter.playlist.persistence.user.UserRepository;
+import eu.itcrafter.playlist.service.user.UserMapper;
+import eu.itcrafter.playlist.service.user.UserService;
 import eu.itcrafter.playlist.service.user.dto.UserDto;
 import eu.itcrafter.playlist.utils.exceptions.DatabaseConstraintException;
 import eu.itcrafter.playlist.utils.exceptions.ResourceNotFoundException;
