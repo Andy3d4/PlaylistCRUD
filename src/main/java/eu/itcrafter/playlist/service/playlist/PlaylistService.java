@@ -2,8 +2,8 @@ package eu.itcrafter.playlist.service.playlist;
 
 import eu.itcrafter.playlist.persistence.playlist.Playlist;
 import eu.itcrafter.playlist.persistence.playlist.PlaylistRepository;
-import eu.itcrafter.playlist.persistence.playlistSong.PlaylistSong;
-import eu.itcrafter.playlist.persistence.playlistSong.PlaylistSongRepository;
+import eu.itcrafter.playlist.persistence.playlistsong.PlaylistSong;
+import eu.itcrafter.playlist.persistence.playlistsong.PlaylistSongRepository;
 import eu.itcrafter.playlist.persistence.user.User;
 import eu.itcrafter.playlist.persistence.user.UserRepository;
 import eu.itcrafter.playlist.service.playlist.dto.PlaylistDto;
@@ -15,8 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static eu.itcrafter.playlist.utils.Error.PLAYLIST_NOT_FOUND;
-import static eu.itcrafter.playlist.utils.Error.SONG_ALREADY_EXISTS;
+import static eu.itcrafter.playlist.utils.Error.*;
 
 @Service
 @RequiredArgsConstructor
@@ -70,5 +69,18 @@ public class PlaylistService {
 
         PlaylistSong playlistSong = new PlaylistSong(playlistId, songId);
         playlistSongRepository.save(playlistSong);
+    }
+    public void deletePlaylist(int id) {
+        if (!playlistRepository.existsById(id)) {
+            throw new ResourceNotFoundException(PLAYLIST_NOT_FOUND.getMessage());
+        }
+        playlistRepository.deleteById(id);
+    }
+
+    public void deleteSongFromPlaylist(int playlistId, int songId) {
+        PlaylistSong playlistSong = playlistSongRepository.findByPlaylistIdAndSongId(playlistId, songId)
+                .orElseThrow(() -> new ResourceNotFoundException("Song or Playlist not found"));
+
+        playlistSongRepository.delete(playlistSong);
     }
 }

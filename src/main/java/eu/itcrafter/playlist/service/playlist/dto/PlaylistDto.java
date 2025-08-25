@@ -1,5 +1,6 @@
 package eu.itcrafter.playlist.service.playlist.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -16,6 +17,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PlaylistDto implements Serializable {
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Integer id;
     @NotNull
     @Size(max = 20)

@@ -1,4 +1,4 @@
-package eu.itcrafter.playlist.persistence.playlistSong;
+package eu.itcrafter.playlist.persistence.playlistsong;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

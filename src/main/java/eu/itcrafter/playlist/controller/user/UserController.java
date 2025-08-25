@@ -1,7 +1,6 @@
 package eu.itcrafter.playlist.controller.user;
 
 import eu.itcrafter.playlist.persistence.user.User;
-import eu.itcrafter.playlist.service.song.dto.SongDto;
 import eu.itcrafter.playlist.service.user.UserService;
 import eu.itcrafter.playlist.service.user.dto.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,5 +47,27 @@ public class UserController {
             @ApiResponse(responseCode = "409", description = "Song name already exists")})
     public void updateUser(@PathVariable("id") Integer id, @RequestParam String name) {
         userService.updateUser(id, name);
+    }
+
+    @PostMapping("/add-user/{userName}")
+    @Operation(summary = "Adds a new user.",
+            description = """
+                    Creates a new user in the system.
+                    If the user already exists, responds with error code 409 (CONFLICT).""")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "409", description = "User already exists")})
+    public void addUser(@PathVariable String userName) {
+        userService.addUser(userName);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Deletes a user based on its ID",
+            description = "Deletes a user in the system.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "404", description = "User not found")})
+    public void deleteUser(@PathVariable int id) {
+        userService.deleteUser(id);
     }
 }

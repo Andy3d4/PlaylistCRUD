@@ -8,8 +8,6 @@ import eu.itcrafter.playlist.utils.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.security.PublicKey;
-import java.time.LocalTime;
 import java.util.List;
 
 import static eu.itcrafter.playlist.utils.Error.SONG_ALREADY_EXISTS;
@@ -74,6 +72,33 @@ public class SongService {
         if (minutes == 0 && seconds == 0) {
             throw new DatabaseConstraintException("Duration must be greater than 0:00");
         }
+    }
+
+    public void addSong(SongDto songDto) {
+        if (songRepository.existsByNameAndIdNot(songDto.getName(), -1)) {
+            throw new DatabaseConstraintException(SONG_ALREADY_EXISTS.getMessage());
+        }
+
+        Song song = new Song();
+        song.setName(songDto.getName());
+        song.setArtist(songDto.getArtist());
+        song.setMood(songDto.getMood());
+        String duration = songDto.getDuration();
+        if (duration != null && !duration.trim().isEmpty()) {
+            validateDurationFormat(duration);
+            song.setDuration(songDto.getDuration());
+        } else {
+            throw new DatabaseConstraintException("Duration is required (e.g., '3:45')");
+        }
+        song.setGenre(songDto.getGenre());
+        songRepository.save(song);
+    }
+
+    public void deleteSong(Integer id) {
+        if (!songRepository.existsById(id)) {
+            throw new ResourceNotFoundException(SONG_NOT_FOUND.getMessage());
+        }
+        songRepository.deleteById(id);
     }
 
 }

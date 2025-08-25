@@ -1,6 +1,5 @@
 package eu.itcrafter.playlist.controller.playlist;
 
-import eu.itcrafter.playlist.persistence.playlist.Playlist;
 import eu.itcrafter.playlist.service.playlist.PlaylistService;
 import eu.itcrafter.playlist.service.playlist.dto.PlaylistDto;
 import eu.itcrafter.playlist.service.playlist.dto.PlaylistWithSongsDto;
@@ -15,7 +14,7 @@ import java.util.List;
 @RequestMapping("api/playlist")
 public class PlaylistController {
 
-private final PlaylistService playlistService;
+    private final PlaylistService playlistService;
 
     public PlaylistController(PlaylistService playlistService) {
         this.playlistService = playlistService;
@@ -38,6 +37,7 @@ private final PlaylistService playlistService;
     public PlaylistWithSongsDto getAllPlaylistSongs(@PathVariable int id) {
         return playlistService.getAllSongsInPlaylist(id);
     }
+
     @PostMapping("/add-playlist")
     @Operation(summary = "Adds a new playlist.",
             description = """
@@ -46,9 +46,10 @@ private final PlaylistService playlistService;
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "409", description = "Playlist already exists")})
-    public void addPlaylist(@RequestBody PlaylistDto playlistDto ) {
+    public void addPlaylist(@RequestBody PlaylistDto playlistDto) {
         playlistService.addPlaylist(playlistDto);
     }
+
     @PostMapping("/add-song-to-playlist/{playlistId}/{songId}")
     @Operation(summary = "Adds a new song to playlist.",
             description = """
@@ -57,7 +58,7 @@ private final PlaylistService playlistService;
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "409", description = "Song already exists")})
-    public void addSongToPlaylist(@RequestParam Integer playlistId, @RequestParam Integer songId ) {
+    public void addSongToPlaylist(@PathVariable("playlistId") Integer playlistId, @PathVariable("songId") Integer songId) {
         playlistService.addSongToPlaylist(playlistId, songId);
     }
 
@@ -72,16 +73,28 @@ private final PlaylistService playlistService;
     public void updatePlaylistName(@PathVariable("id") Integer id, @RequestParam String name) {
         playlistService.updatePlaylistName(id, name);
     }
-    /*@DeleteMapping("/{id}")
-    @Operation(summary = "Deletes the genre by id. If the genre is associated with a movie, deletion is not allowed.",
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Deletes the playlist by id. If the playlist is associated with a song, deletion is not allowed.",
             description = """
-                    Deletes the genre name from the system.
+                    Deletes the playlist name from the system.
                     If the genre does not exist, responds with error code 409 (CONFLICT).""")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")})
-    public void deleteGenre(@PathVariable("id") Integer id) {
-        genreService.deleteGenreBy(id);
-    }*/
+    public void deletePlaylist(@PathVariable("id") Integer id) {
+        playlistService.deletePlaylist(id);
+    }
+
+    @DeleteMapping("/{playlistId}/{songId}")
+    @Operation(summary = "Deletes the song from the playlist by id.",
+            description = """
+                    Deletes the song from playlist.
+                    If the genre does not exist, responds with error code 409 (CONFLICT).""")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK")})
+    public void deleteSongFromPlaylist(@PathVariable("playlistId") Integer playlistId, @PathVariable("songId") Integer songId) {
+        playlistService.deleteSongFromPlaylist(songId, playlistId);
+    }
 }
 
 

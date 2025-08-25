@@ -12,7 +12,10 @@ public enum Error {
     SONG_ALREADY_EXISTS("Song already exists"),
 
     PLAYLIST_NOT_FOUND("Playlist not found"),
-    PLAYLIST_ALREADY_EXISTS("Playlist already exists");
+    PLAYLIST_ALREADY_EXISTS("Playlist already exists"),
+
+    USER_NOT_FOUND("User not found"),
+    USER_ALREADY_EXISTS("User already exists");
 
 
     private final String message;

@@ -2,7 +2,6 @@ package eu.itcrafter.playlist.service.song.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import java.time.LocalTime;
 
 @Getter
 @Setter
