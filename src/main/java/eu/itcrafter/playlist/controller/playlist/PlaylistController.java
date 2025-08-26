@@ -78,7 +78,7 @@ public class PlaylistController {
     @Operation(summary = "Deletes the playlist by id. If the playlist is associated with a song, deletion is not allowed.",
             description = """
                     Deletes the playlist name from the system.
-                    If the genre does not exist, responds with error code 409 (CONFLICT).""")
+                    If the playlist does not exist, responds with error code 409 (CONFLICT).""")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")})
     public void deletePlaylist(@PathVariable("id") Integer id) {
@@ -89,7 +89,7 @@ public class PlaylistController {
     @Operation(summary = "Deletes the song from the playlist by id.",
             description = """
                     Deletes the song from playlist.
-                    If the genre does not exist, responds with error code 409 (CONFLICT).""")
+                    If the song or playlist does not exist, responds with error code 409 (CONFLICT).""")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK")})
     public void deleteSongFromPlaylist(@PathVariable("playlistId") Integer playlistId, @PathVariable("songId") Integer songId) {

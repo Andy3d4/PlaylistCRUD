@@ -1,6 +1,5 @@
 package eu.itcrafter.playlist.utils;
 
-import eu.itcrafter.playlist.utils.ApiError;
 import eu.itcrafter.playlist.utils.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;

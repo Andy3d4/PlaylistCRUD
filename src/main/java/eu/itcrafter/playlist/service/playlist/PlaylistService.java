@@ -15,7 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static eu.itcrafter.playlist.utils.Error.*;
+import static eu.itcrafter.playlist.utils.Error.PLAYLIST_NOT_FOUND;
+import static eu.itcrafter.playlist.utils.Error.SONG_ALREADY_EXISTS;
 
 @Service
 @RequiredArgsConstructor
@@ -70,6 +71,7 @@ public class PlaylistService {
         PlaylistSong playlistSong = new PlaylistSong(playlistId, songId);
         playlistSongRepository.save(playlistSong);
     }
+
     public void deletePlaylist(int id) {
         if (!playlistRepository.existsById(id)) {
             throw new ResourceNotFoundException(PLAYLIST_NOT_FOUND.getMessage());

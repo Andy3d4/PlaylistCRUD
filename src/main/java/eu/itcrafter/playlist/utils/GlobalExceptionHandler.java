@@ -26,8 +26,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(DatabaseNameConflictException.class)
-    protected ResponseEntity<ApiError>handleDatabaseNameConflict(DatabaseNameConflictException ex, HttpServletRequest request) {
-        ApiError apiError =new ApiError(
+    protected ResponseEntity<ApiError> handleDatabaseNameConflict(DatabaseNameConflictException ex, HttpServletRequest request) {
+        ApiError apiError = new ApiError(
                 HttpStatus.CONFLICT,
                 HttpStatus.CONFLICT.value(),
                 ex.getMessage(),
