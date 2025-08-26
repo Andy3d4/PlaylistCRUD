@@ -45,7 +45,7 @@ ALTER TABLE PlaylistSong ADD CONSTRAINT PlaylistSong_Playlist
 -- Reference: PlaylistSong_Song (table: PlaylistSong)
 ALTER TABLE PlaylistSong ADD CONSTRAINT PlaylistSong_Song
     FOREIGN KEY (songId)
-    REFERENCES Song (id);
+    REFERENCES Song (id) ON DELETE CASCADE;
 
 -- Reference: Playlist_User (table: Playlist)
 ALTER TABLE Playlist ADD CONSTRAINT Playlist_User
