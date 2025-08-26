@@ -51,6 +51,10 @@ public class PlaylistService {
 
         User user = userRepository.findByUsername(playlistDto.getUsername()).orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
+        savePlaylist(playlistDto, user);
+    }
+
+    private void savePlaylist(PlaylistDto playlistDto, User user) {
         Playlist playlist = new Playlist();
         playlist.setName(playlistDto.getName());
         playlist.setCreatedat(playlistDto.getCreatedat());

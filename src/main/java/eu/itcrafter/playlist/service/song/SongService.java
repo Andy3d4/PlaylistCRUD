@@ -37,6 +37,10 @@ public class SongService {
             throw new DatabaseConstraintException(SONG_ALREADY_EXISTS.getMessage());
         }
 
+        updateSongFields(songDto, song);
+    }
+
+    private void updateSongFields(SongDto songDto, Song song) {
         song.setName(songDto.getName());
         song.setArtist(songDto.getArtist());
         song.setMood(songDto.getMood());
@@ -47,7 +51,6 @@ public class SongService {
         } else {
             throw new DatabaseConstraintException("Duration is required (e.g., '3:45')");
         }
-
         song.setGenre(songDto.getGenre());
         songRepository.save(song);
     }
@@ -80,18 +83,7 @@ public class SongService {
         }
 
         Song song = new Song();
-        song.setName(songDto.getName());
-        song.setArtist(songDto.getArtist());
-        song.setMood(songDto.getMood());
-        String duration = songDto.getDuration();
-        if (duration != null && !duration.trim().isEmpty()) {
-            validateDurationFormat(duration);
-            song.setDuration(songDto.getDuration());
-        } else {
-            throw new DatabaseConstraintException("Duration is required (e.g., '3:45')");
-        }
-        song.setGenre(songDto.getGenre());
-        songRepository.save(song);
+        updateSongFields(songDto, song);
     }
 
     public void deleteSong(Integer id) {

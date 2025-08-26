@@ -31,8 +31,7 @@ public class UserService {
 
     public void updateUser(Integer userId, String name) {
         User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException(USER_NOT_FOUND.getMessage()));
-        user.setUsername(name);
-        userRepository.save(user);
+        saveUserName(name, user);
     }
 
     public void addUser(String name) {
@@ -40,6 +39,10 @@ public class UserService {
             throw new DatabaseConstraintException(USER_ALREADY_EXISTS.getMessage());
         }
         User user = new User();
+        saveUserName(name, user);
+    }
+
+    private void saveUserName(String name, User user) {
         user.setUsername(name);
         userRepository.save(user);
     }
