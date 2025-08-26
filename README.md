@@ -45,5 +45,4 @@ Run: ./gradlew bootRun
 Test: ./gradlew test
 License
 MIT License
-<hr></hr>
 For more details, see the source code and API documentation.
