@@ -1,48 +1,86 @@
-Playlist Graduation Project
-Overview
-This is a Spring Boot REST API for managing playlists, songs, and users. It supports CRUD operations for playlists, songs, and users, and allows associating songs with playlists. The application uses an in-memory HSQLDB database for development and testing.
-Features
-User Management: Add, update, delete, and list users.
-Playlist Management: Add, update, delete, and list playlists. Associate playlists with users.
-Song Management: Add, update, delete, and list songs. Associate songs with playlists.
-Playlist-Song Association: Add or remove songs from playlists.
-OpenAPI/Swagger: API documentation via Swagger annotations.
-Database
-HSQLDB (In-Memory): No setup required; data is lost on application shutdown.
-Schema: See src/main/resources/PlaylistERD.png for the entity relationship diagram.
-Running the Application
-Dependencies: Ensure you have Java 17+ and Gradle installed.
-Start the App:
-./gradlew bootRun
-API Documentation: Visit /swagger-ui.html after starting the app.
-Testing
-Unit & Integration Tests: Located in src/test/java.
-Test Database: Uses HSQLDB in-memory. Configuration is in src/test/resources/application.properties.
-Run Tests:
+# Playlist API
+
+A Spring Boot REST API for managing music playlists, songs, and users. Built for easy playlist creation and music organization.
+
+## 🚀 Quick Start
+
+1. **Prerequisites**: Java 17+ and Gradle
+2. **Run the application**:
+   ```bash
+   ./gradlew bootRun
+   ```
+3. **View API documentation**: Open `http://localhost:8080/swagger-ui.html`
+
+## 📋 Features
+
+- **User Management**: Create and manage user accounts
+- **Song Library**: Add, update, and organize your music collection
+- **Playlist Creation**: Build custom playlists and manage their contents
+- **Easy Integration**: RESTful API with comprehensive Swagger documentation
+
+## 🔗 API Endpoints
+
+### Users
+- `GET /api/user/{id}` - Get user by ID
+- `PUT /api/user/{id}` - Update user information
+- `DELETE /api/user/{id}` - Delete a user
+- `POST /api/user/add-user/{userName}` - Create a new user
+- `GET /api/user/all-users` - List all users
+
+### Songs
+- `GET /api/song/{id}` - Get song by ID
+- `PUT /api/song/{id}` - Update song information
+- `DELETE /api/song/{id}` - Delete a song
+- `POST /api/song/add-song` - Add a new song
+- `GET /api/song/all-songs` - List all songs
+
+### Playlists
+- `PUT /api/playlist/{id}` - Update playlist name
+- `DELETE /api/playlist/{id}` - Delete a playlist
+- `POST /api/playlist/add-song-to-playlist/{playlistId}/{songId}` - Add song to playlist
+- `POST /api/playlist/add-playlist` - Create a new playlist
+- `GET /api/playlist/playlist-songs/{id}` - Get all songs in a playlist
+- `GET /api/playlist/all` - List all playlists
+- `DELETE /api/playlist/{playlistId}/{songId}` - Remove song from playlist
+
+## 💾 Database
+
+Uses **HSQLDB** (in-memory) for development:
+- No setup required
+- Data resets on application restart
+- Perfect for development and testing
+
+### Data Model
+- **Users** can create multiple **Playlists**
+- **Playlists** can contain multiple **Songs**
+- **Songs** can appear in multiple **Playlists**
+
+## 🧪 Development
+
+### Build the project:
+```bash
+./gradlew build
+```
+
+### Run tests:
+```bash
 ./gradlew test
-Configuration
-Main DB Config: src/main/resources/application.properties
-Test DB Config: src/test/resources/application.properties
-spring.datasource.url=jdbc:hsqldb:mem:testdb
-spring.datasource.username=sa
-spring.datasource.password=
-spring.datasource.driver-class-name=org.hsqldb.jdbc.JDBCDriver
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.sql.init.mode=always
-Project Structure
-controller/ - REST controllers
-service/ - Business logic
-persistence/ - JPA entities and repositories
-resources/ - Configuration, schema, and data files
-Entity Relationship
-User: Has many Playlists
-Playlist: Belongs to a User, has many Songs (via PlaylistSong)
-Song: Can belong to many Playlists
-PlaylistSong: Join table for Playlist and Song
-Useful Commands
-Build: ./gradlew build
-Run: ./gradlew bootRun
-Test: ./gradlew test
-License
+```
+
+### Project Structure:
+```
+src/
+├── main/java/
+│   ├── controller/     # REST API endpoints
+│   ├── service/        # Business logic
+│   └── persistence/    # Database entities & repositories
+└── test/java/          # Unit and integration tests
+```
+
+## 📝 License
+
 MIT License
-For more details, see the source code and API documentation.
+
+---
+
+*For detailed API specifications and interactive testing, visit the Swagger UI at `/swagger-ui.html` when the application is running.*
