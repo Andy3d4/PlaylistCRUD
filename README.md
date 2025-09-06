@@ -74,13 +74,9 @@ src/
 │   ├── controller/     # REST API endpoints
 │   ├── service/        # Business logic
 │   └── persistence/    # Database entities & repositories
+├── main/resources/
+│   ├── PlalistERD.png  # Database schema diagram
 └── test/java/          # Unit and integration tests
 ```
-
-## 📝 License
-
-MIT License
-
----
 
 *For detailed API specifications and interactive testing, visit the Swagger UI at `/swagger-ui.html` when the application is running.*
